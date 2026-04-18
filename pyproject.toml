@@ -42,3 +42,7 @@ packages = ["app"]
 
 [tool.poetry]
 package-mode = false
+
+packages = [
+    { include = "app" }
+]
