@@ -1,4 +1,6 @@
 import logging
+from typing_extensions import Annotated
+from fastapi.params import Depends
 from sqlmodel import SQLModel, Session, create_engine
 from app.config import get_settings
 from contextlib import contextmanager
@@ -13,6 +15,12 @@ engine = create_engine(
     pool_timeout=get_settings().db_pool_timeout,
     pool_recycle=get_settings().db_pool_recycle,
 )
+
+def get_session():
+    with Session(engine) as session:
+        yield session
+
+SessionDep = Annotated[Session, Depends(get_session)]
 
 def create_db_and_tables():
     SQLModel.metadata.create_all(engine)
