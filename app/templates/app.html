@@ -3,7 +3,23 @@
 {% block external_js %}
 <script src="{{ url_for('static', path='js/app.js')}}"></script>
 {% endblock %}
+<style>
+      div.card{
+    margin:0;
+  }
 
+  #result{
+    margin-top:10px;
+    height: 40vh;
+    overflow-y: scroll;
+  }
+
+  .card{
+    height: 265px;
+    padding-top: 50px;
+  }
+
+</style>
 
 {% block subpage_content %}
 
@@ -21,10 +37,28 @@
                   </tr>
                 </thead>
                 <tbody id="result">
-                
+                    
                 <tbody>
             </table>
         </div>
     </div>
+        <div class="container" id="content">
+            <div class="row">  
+                {% for todo in current_user.todos %}
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Id</th><th>Todo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>{{todo.user_id}}</td><td>{{todo.text}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
 
 {% endblock %}

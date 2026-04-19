@@ -16,6 +16,6 @@ async def user_home_view(
         request=request, 
         name="app.html",
         context={
-            "user": user
+            "current_user": user
         }
     )
